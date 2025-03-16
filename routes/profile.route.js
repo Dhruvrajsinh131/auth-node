@@ -13,7 +13,7 @@ profileRouter.get("/profile", verifytoken, async (req, res) => {
 
   const welcomeMessage = `Welcome Back ${firstname} ${lastname}`;
 
-  res.json({
+  return res.json({
     success: true,
     message: welcomeMessage,
   });

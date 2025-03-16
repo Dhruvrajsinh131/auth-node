@@ -3,7 +3,7 @@ import { Router } from "express";
 const pingrouter = Router();
 
 pingrouter.get("/ping", (_, res) => {
-  res.json({
+  return res.json({
     success: true,
     message: "Pong!!!",
   });

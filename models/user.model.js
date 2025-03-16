@@ -26,7 +26,6 @@ const userSchema = new Schema(
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("hashedpassword")) return next();
-  console.log("this", this);
 
   this.hashedpassword = await bcrypt.hash(this.hashedpassword, 10);
   next();
@@ -36,11 +35,9 @@ userSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.hashedpassword);
 };
 
-const USER = model("user", userSchema);
+const USER = model("User", userSchema);
 
 async function createUser(data) {
-  console.log("data", data);
-
   const user = new USER(data);
   await user.save();
   return user;

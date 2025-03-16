@@ -1,11 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const verifytoken = (req, res, next) => {
-  console.log("req.cookies", req.cookies);
-
   const token = req.cookies.token;
-
-  console.log("token", token);
 
   if (!token)
     return res.status(401).json({
@@ -18,7 +14,7 @@ const verifytoken = (req, res, next) => {
 
     req._id = decoded.id;
   } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Invalid token" });
   }
 
   next();
