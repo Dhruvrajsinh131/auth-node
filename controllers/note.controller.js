@@ -29,7 +29,7 @@ const getAllNotes = async (req, res) => {
   try {
     const { _id } = req;
 
-    const allNotes = await NOTE.find({ userId: _id });
+    const allNotes = await NOTE.find({ userId: _id }).sort({ createdAt: -1 });
 
     return res.json({
       success: true,

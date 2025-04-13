@@ -5,16 +5,20 @@ import cookieParser from "cookie-parser";
 const app = express();
 import cors from "cors";
 import { config } from "dotenv";
+import { env } from "node:process";
 config();
 
-const PORT = 9090;
-
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:3001", credentials: true }));
+app.use(
+  cors({
+    origin: [env.ALLOWED_ORIGIN],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routerFactory);
 connectToMongo().then(() => {
-  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+  app.listen(env.PORT, () => console.log(`Server running on ${env.PORT}`));
 });
